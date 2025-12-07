@@ -1,7 +1,7 @@
 # Vault - Abstraction Library for Bukkit - [![Build Status](https://app.travis-ci.com/MilkBowl/Vault.svg?branch=master)](https://app.travis-ci.com/MilkBowl/Vault)
 
 ## For Developers:
-Please see the [VaultAPI](https://www.github.com/MilkBowl/VaultAPI) page for
+Please see the [VaultAPI](https://github.com/federkone/VaultAPI) page for
 information on developing with Vault's API. In the past, you would use the same
 artifact as servers installed, but the API has now been split from the main
 project and is under a different artifact name. Please make sure you accommodate
@@ -74,6 +74,9 @@ Vault provides abstraction for the following categories and plugins. If
 you have your own plugin that you believe should be supported, you'll need
 to add your own connector within your plugin as Vault no longer maintains
 new plugin connectors.
+
+* Economy
+  - DynastyEconomy (https://www.spigotmc.org/resources/dynastyeconomy.129308/)
 
 * Permissions
   - bPermissions
