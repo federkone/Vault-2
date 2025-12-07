@@ -118,7 +118,7 @@ public class Vault extends JavaPlugin {
     public void onDisable() {
         // Remove all Service Registrations
         getServer().getServicesManager().unregisterAll(this);
-        Bukkit.getScheduler().cancelTasks(this);
+        //Bukkit.getScheduler().cancelTasks(this);
     }
 
     @Override

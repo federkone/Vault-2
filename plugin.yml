@@ -1,7 +1,7 @@
 name: ${project.name}
 version: ${project.version}
 description: ${project.description}
-authors: [cereal, Sleaker, mung3r]
+authors: [cereal, Sleaker, mung3r, federkone]
 website: ${project.url}
 api-version: 1.13
 
