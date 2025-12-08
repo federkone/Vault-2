@@ -39,6 +39,7 @@ import net.milkbowl.vault.chat.plugins.Chat_mChat;
 import net.milkbowl.vault.chat.plugins.Chat_mChatSuite;
 import net.milkbowl.vault.chat.plugins.Chat_rscPermissions;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyMultiCurrency;
 import net.milkbowl.vault.economy.plugins.Economy_BOSE7;
 import net.milkbowl.vault.economy.plugins.Economy_CommandsEX;
 import net.milkbowl.vault.economy.plugins.Economy_CurrencyCore;
@@ -87,6 +88,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.event.server.ServiceEvent;
+import org.bukkit.event.server.ServiceRegisterEvent;
+import org.bukkit.event.server.ServiceUnregisterEvent;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -653,6 +657,30 @@ public class Vault extends JavaPlugin {
                     }
                 }
             }
+        }
+
+        @EventHandler(priority =  EventPriority.MONITOR)
+        public void onRegisteredServiceProvider(ServiceRegisterEvent event){
+            if (event.getProvider().getService() != EconomyMultiCurrency.class) {
+                return;
+            }
+
+            RegisteredServiceProvider<EconomyMultiCurrency> provider = (RegisteredServiceProvider<EconomyMultiCurrency>) event.getProvider();
+            EconomyMultiCurrency economy = provider.getProvider();
+
+            Bukkit.getServicesManager().register(net.milkbowl.vault.economy.Economy.class, economy, provider.getPlugin(), ServicePriority.Highest);
+        }
+
+        @EventHandler(priority = EventPriority.MONITOR)
+        public void onUnregisteredServiceProvider(ServiceUnregisterEvent event){
+            if (event.getProvider().getService() != EconomyMultiCurrency.class) {
+                return;
+            }
+
+            RegisteredServiceProvider<EconomyMultiCurrency> provider = (RegisteredServiceProvider<EconomyMultiCurrency>) event.getProvider();
+            EconomyMultiCurrency economy = provider.getProvider();
+
+            Bukkit.getServicesManager().unregister(net.milkbowl.vault.economy.Economy.class, provider.getPlugin());
         }
     }
 }
